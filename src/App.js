@@ -7,6 +7,8 @@ import { setToken } from './actions';
 
 import { connect } from 'react-redux';
 
+import SchoolCard from "./components/SchoolCard";
+
 function App(props) {
   const [authToken, setAuthToken] = useToken();
 
@@ -18,7 +20,7 @@ function App(props) {
 
   return (
     <div className="App">
-      
+      <SchoolCard/> 
     </div>
   );
 }
