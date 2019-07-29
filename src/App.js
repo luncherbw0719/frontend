@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
-function App() {
+import { useToken } from './hooks';
+
+import { setToken } from './actions';
+
+import { connect } from 'react-redux';
+
+function App(props) {
+  const [authToken, setAuthToken] = useToken();
+
+  const init = () => {
+    props.setToken(authToken, setAuthToken);
+  }
+
+  useEffect(init, []);
+
   return (
     <div className="App">
       
@@ -9,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(state => ({...state}), { setToken })(App);
