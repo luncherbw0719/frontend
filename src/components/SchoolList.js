@@ -1,3 +1,5 @@
+// Might not use SchoolList or SchoolCard components (using Margaret's browse schools components instead)
+
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";

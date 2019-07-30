@@ -1,3 +1,5 @@
+// Might not use SchoolList or SchoolCard components (using Margaret's browse schools components instead)
+
 import React from "react";
 
 import styled from "styled-components";
