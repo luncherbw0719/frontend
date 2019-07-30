@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import schoolCard from '/.schoolCard.js'
+import SchoolCard from '/.schoolCard.js'
 
 export default function schoolBrowseList() {
 
 const [schools, setSchools] = useState( [] );
 
-useEffect(() => {axios.get()
+useEffect(() => {axios.get("https://schooldonations-luncher.herokuapp.com/schools/schools")
 
 
     .then (res => {setSchools(res.data.results);
@@ -23,9 +23,9 @@ useEffect(() => {axios.get()
     </header>
    
 
-    <div class="schoolcards">
+    <div class="schoolcards">3
       
-      {schools.map(school => (<schoolCard {...school.props}
+      {schools.map(school => (<SchoolCard {...school.props}
       />)
       )}
               
