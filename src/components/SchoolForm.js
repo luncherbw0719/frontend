@@ -2,7 +2,6 @@
 // (add, edit, and delete school page for school admins)
 
 import React, { useState } from "react";
-import axios from "axios";
 import styled from "styled-components";
 
 const AddSchool = styled.h1`
