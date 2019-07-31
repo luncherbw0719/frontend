@@ -9,8 +9,9 @@ const Navbar = props => {
     <div className='navbar'>
       <div className='left'>
         {/* Logo should go here */}
-        <Link className='header' exact to='/'><h1 className='header'>Luncher</h1></Link>
+        <Link className='header' to='/'><h1 className='header'>Luncher</h1></Link>
         <NavLink exact to='/schools' className='navbar-btn' activeClassName='active'>Browse Schools</NavLink>
+        <NavLink exact to='/sdashboard' className='navbar-btn' activeClassName='active'>School Dashboard</NavLink>
       {/* Conditional NavLink will go here, depending on whether account type is donor or school */}
       </div>
       <div className='right'>

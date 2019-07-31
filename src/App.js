@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
 
-import { useToken } from "./hooks";
-
 import { setToken } from "./actions";
 
 import { connect } from "react-redux";
@@ -15,10 +13,8 @@ import SchoolPage from './components/SchoolPage';
 import { Route } from 'react-router-dom';
 
 function App(props) {
-  const [authToken, setAuthToken] = useToken();
-
   const init = () => {
-    props.setToken(authToken, setAuthToken);
+    props.setToken(localStorage.getItem('token'));
   };
 
   useEffect(init, []);
