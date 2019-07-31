@@ -12,6 +12,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: space-between;
+    flex-direction: column;
 
     .field-label {
       min-width: 80px;
@@ -22,7 +24,7 @@
     
     .field-input {
       flex-grow: 100;
-      padding: 5px;
+      padding: 5px 20px;
       border: 1px solid black;
       border-radius: 9px;
       margin-bottom: 8px;
@@ -33,6 +35,19 @@
 
     .field-input:focus {
       border: 1px solid #F2755C;
+    }
+
+    .radio {
+      margin-top: 6px;
+      display: flex;
+      width: 50%;
+      justify-content: space-between;
+    }
+
+    .dollarsign {
+     position: absolute;
+     color: gray;
+     transform: translateY(24px) translateX(10px); 
     }
   }
 
