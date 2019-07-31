@@ -1,20 +1,45 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import axios from 'axios';
+
+const StyledCards = styled.div`
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  background-color: lightblue;
+  width: 100%;
+  padding: 2%;
+  margin-top: 3%;
+`;
+
+const LineSpacing = styled.div`
+  margin-top: 5%;
+`;
+
+const SchoolHeader = styled.div`
+  font-family: "Arial Black";
+  font-size: 1.5rem;
+`;
+
+
+const AddSchool = styled.div`
+  margin-top: 5%;
+  font-family: "Arial Black"
+  color: red;
+`;
 
 function SchoolPage(props) {
-  const {
-    schoolName,
-    schoolLocation,
-    CurrentFunds,
-    NeededFunds,
-    schoolID
-  } = props.school;
+  const { name, location, currentfunds, neededfunds, schoolId } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
-    schoolName: schoolName,
-    schoolLocation: schoolLocation,
-    CurrentFunds: CurrentFunds,
-    NeededFunds: NeededFunds,
-    schoolID: schoolID
+    name: name,
+    location: location,
+    currentfunds: currentfunds,
+    neededfunds: neededfunds,
+    schoolId: schoolId
   });
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
@@ -31,9 +56,20 @@ function SchoolPage(props) {
   // instead of hanldeSubmit in form.js we have new const, handleUpdate (passes inputed data as props to update/edit)
   const handleUpdate = event => {
     event.preventDefault();
-    props.update(input);
+    //props.update(input);
     setEditing(false);
-  };
+    // const token = localStorage.getItem("auth-token");
+    // axios
+    // .put(
+    //   "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolId}",
+    //   input,
+    //   { headers: { Authorization: `Bearer ${token}` } }
+    // )
+    // .then(res => {
+    //   console.log("succes", res);
+    // })
+    // .catch(err => console.log("err", err.res));
+};
 
   // Edit shows as boolean - T/F (apply to if/else below)
   console.log("edit", editing);
@@ -41,56 +77,72 @@ function SchoolPage(props) {
   if (editing === false) {
     return (
       // editing existing schools
-      <div>
-        <div>School: {schoolName}</div>
-        <div>Location: {schoolLocation}</div>
-        <div>Current Funds: {CurrentFunds}</div>
-        <div>Needed Funds: {NeededFunds}</div>
-        <button onClick={handleEdit}>Edit</button>
-      </div>
+      <StyledCards>
+        <div>
+            <SchoolHeader>
+          <div>{name}</div>
+          </SchoolHeader>
+          <LineSpacing>
+            <div>{location}</div>
+          </LineSpacing>
+
+          <LineSpacing>
+              <h3>Lunch Funding </h3>
+            <div>Current: ${currentfunds}</div>
+            <div>Needed: ${neededfunds}</div>
+          </LineSpacing>
+
+          <LineSpacing>
+            <button onClick={handleEdit}>Edit School</button>
+          </LineSpacing>
+        </div>
+      </StyledCards>
     );
   } else {
+    // Single School Page - An admin will be able to see their current funds and be able to add their needs for more funding, update and delete their profile and funding needs.
     return (
-      // adding new schools - copy/paste from form.js (just for <form onSumbit > use handleUpdate from above instead of handleSubmit)
       <div className="school-page-form">
         <form onSubmit={handleUpdate}>
-          <label htmlFor="schoolName">
+            <AddSchool>
+          <h4>Edit</h4>
+          </AddSchool>
+          <label htmlFor="name">
             School:{" "}
             <input
               type="text"
-              name="schoolName"
-              value={input.schoolName}
+              name="name"
+              value={input.name}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="schoolLocation">
+          <label htmlFor="location">
             Location:{" "}
             <input
               type="text"
-              name="schoolLocation"
-              value={input.schoolLocation}
+              name="location"
+              value={input.location}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="CurrentFunds">
+          <label htmlFor="currentfunds">
             Current Funds: ${" "}
             <input
-              type="text"
-              name="CurrentFunds"
-              value={input.CurrentFunds}
+              type="number"
+              name="currentfunds"
+              value={input.currentfunds}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="NeededFunds">
+          <label htmlFor="neededfunds">
             Needed Funds: ${" "}
             <input
-              type="text"
-              name="NeededFunds"
-              value={input.NeededFunds}
+              type="number"
+              name="neededfunds"
+              value={input.neededfunds}
               onChange={handleChange}
             />
           </label>
-          <button>Submit</button>
+          <button>Submit!</button>
         </form>
       </div>
       // end of copy/paste from SchoolForm.js

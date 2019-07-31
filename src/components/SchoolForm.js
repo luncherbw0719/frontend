@@ -2,83 +2,97 @@
 // (add, edit, and delete school page for school admins)
 
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const AddSchool = styled.h1`
+  margin-top: 5%;
+  font-family: "Arial Black";
+`;
 
 function SchoolForm(props) {
   const [input, setInput] = useState({
-      schoolName: " ",
-      schoolLocation: " ",
-      CurrentFunds: " ",
-      NeededFunds: " ",
-      schoolID: null,
+    name: " ",
+    location: " ",
+    currentfunds: 0,
+    neededfunds: 0,
+    //no api add id manualy
+    schoolid: null
   });
   // form input
   const handleChange = event => {
-    console.log(event.target.schoolName);
+    console.log(event.target.name);
     console.log(event.target.value);
-    setInput({ ...input, [event.target.name]: event.target.value });
+
+    setInput({
+      ...input,
+      [event.target.name]:
+        event.target.type === "number"
+          ? parseInt(event.target.value)
+          : event.target.value
+    });
   };
   // form submission
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(input.schoolName);
-    console.log(input.schoolLocation);
-    console.log(input.CurrentFunds);
-    console.log(input.NeededFunds);
-    props.add({ ...input, id: Math.random() });
+    console.log(input.name);
+    console.log(input.location);
+    console.log(input.currentfunds);
+    console.log(input.neededfunds);
+    props.add(input);
     setInput({
-        schoolName: " ",
-        schoolLocation: " ",
-        CurrentFunds: " ",
-        NeededFunds: " ",
-        schoolID: null,
+      name: " ",
+      location: " ",
+      currentfunds: " ",
+      neededfunds: " ",
+      schoolid: null
     });
   };
   console.log("props", props);
   console.log("input", input);
   return (
     <div className="school-page-form">
-         <form onSubmit={handleSubmit}>
-           <h4>Add School</h4>
-        <label htmlFor="schoolName">
-          School: {" "}
+      <form onSubmit={handleSubmit}>
+        <AddSchool>Add School</AddSchool>
+        <label htmlFor="name">
+          School:{" "}
           <input
             type="text"
-            name="schoolName"
-            value={input.schoolName}
+            name="name"
+            value={input.name}
             onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="schoolLocation">
-          Location: {" "}
+          />
+        </label>
+        <label htmlFor="location">
+          Location:{" "}
           <input
             type="text"
-            name="schoolLocation"
-            value={input.schoolLocation}
+            name="location"
+            value={input.location}
             onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="CurrentFunds">
+          />
+        </label>
+        <label htmlFor="currentfunds">
           Current Funds: ${" "}
           <input
-            type="text"
-            name="CurrentFunds"
-            value={input.CurrentFunds}
+            type="number"
+            name="currentfunds"
+            value={input.currentfunds}
             onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="NeededFunds">
+          />
+        </label>
+        <label htmlFor="neededfunds">
           Needed Funds: ${" "}
           <input
-            type="text"
-            name="NeededFunds"
-            value={input.NeededFunds}
+            type="number"
+            name="neededfunds"
+            value={input.neededfunds}
             onChange={handleChange}
-            />
-          </label>
-          <button>Submit!</button>
-        </form>
-      </div>
-    );
-  }
+          />
+        </label>
+        <button>Submit!</button>
+      </form>
+    </div>
+  );
+}
 
-  export default SchoolForm; 
+export default SchoolForm;
