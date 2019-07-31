@@ -5,18 +5,18 @@ import { setToken } from "./actions";
 
 import { connect } from "react-redux";
 
-import Navbar from './components/Navbar';
-import Landing from './components/Landing';
-import SchoolBrowse from './components/SchoolBrowse';
-import SchoolPage from './components/SchoolPage';
+import Navbar from "./components/Navbar";
+import Landing from "./components/Landing";
+import SchoolBrowse from "./components/SchoolBrowse";
+import SchoolPage from "./components/SchoolPage";
 
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
 
-import SchoolDonor from './components/SchoolDonor';
+import SchoolDonor from "./components/SchoolDonor";
 
 function App(props) {
   const init = () => {
-    props.setToken(localStorage.getItem('token'));
+    props.setToken(localStorage.getItem("token"));
   };
 
   useEffect(init, []);
@@ -28,14 +28,19 @@ function App(props) {
     fundGoal: 4000,
     schoolId: 0,
     donors: []
-  }
+  };
 
   return (
     <div className="App">
       <Navbar />
-      <Route exact path='/' render={props => <Landing {...props} />} />
-      <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
-      <Route path='/sdashboard' render={props => <SchoolPage {...props} dashboard school={fakeSchool} />} />
+      <Route exact path="/" render={props => <Landing {...props} />} />
+      <Route path="/schools" render={props => <SchoolBrowse {...props} />} />
+      <Route
+        path="/sdashboard"
+        render={props => (
+          <SchoolPage {...props} dashboard school={fakeSchool} />
+        )}
+      />
       {/* Add more routes above this comment as necessary */}
     </div>
   );
