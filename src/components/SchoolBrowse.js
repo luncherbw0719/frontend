@@ -1,39 +1,41 @@
-import React from 'react';
-import './App.css';
-import SchoolCard from '/.schoolCard.js'
+import React, { useState, useEffect } from "react";
+import SchoolCard from "./SchoolCard";
 
-export default function schoolBrowseList() {
+import axios from "axios";
 
-const [schools, setSchools] = useState( [] );
+export default function SchoolBrowse() {
+  const [schools, setSchools] = useState([
+    {
+      schoolName: "Oxford Academy",
+      image: 'url',
+      schoolLocation: "Kuwait City",
+      currentFunds: 1000
+    }
+  ]);
 
-useEffect(() => {axios.get("https://schooldonations-luncher.herokuapp.com/schools/schools")
+  // useEffect(() => {
+  //   axios
+  //     .get("https://schooldonations-luncher.herokuapp.com/schools/schools")
 
+  //     .then(res => {
+  //       setSchools(res.data.results);
+  //     })
 
-    .then (res => {setSchools(res.data.results);
-    })
-  
-    .catch( err => console.log("Error Msg", err))
-  
-}, [])
+  //     .catch(err => console.log("Error Msg", err));
+  // }, []);
 
-  return 
-  <section>
-    <header>
-    <h1>Browse Schools</h1>
-    </header>
-   
+  return (
+    <section>
+      <header>
+        <h1>Browse Schools</h1>
+      </header>
 
-    <div class="schoolcards">3
-      
-      {schools.map(school => (<SchoolCard {...school.props}
-      />)
-      )}
-              
-            
+      <div class="schoolcards">
+        3
+        {schools.map(school => (
+          <SchoolCard {...school} />
+        ))}
       </div>
-      </section>
+    </section>
+  );
 }
-    
-
-
-
