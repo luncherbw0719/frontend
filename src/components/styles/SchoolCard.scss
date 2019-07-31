@@ -1,13 +1,19 @@
 .school-card {
-display: block;
-padding: 0 20px 25px;
+display:block;
+padding: 20px 20px 25px;
 border: 1px solid lightgrey;
 border-radius: 10px;
 background-color: white;
 position: relative;
-height: 50px;
+
+
+align-content: center;
 overflow: hidden;
 box-shadow: 2px 2px 2px lightgrey;
+margin-left:50px;
+margin-right:50px;
+margin-top:10px;
+
 
   h1 {
       color: #F2755C;
