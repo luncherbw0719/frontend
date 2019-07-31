@@ -7,7 +7,12 @@ import { setToken } from "./actions";
 
 import { connect } from "react-redux";
 
-import SchoolPageApp from "./SchoolPageApp";
+import Navbar from './components/Navbar';
+import Landing from './components/Landing';
+import SchoolBrowse from './components/SchoolBrowse';
+import SchoolPage from './components/SchoolPage';
+
+import { Route } from 'react-router-dom';
 
 function App(props) {
   const [authToken, setAuthToken] = useToken();
@@ -18,9 +23,21 @@ function App(props) {
 
   useEffect(init, []);
 
+  const fakeSchool = {
+    name: "Woodbridge",
+    location: "Irvine",
+    currentFunds: 1000,
+    neededFunds: 400,
+    schoolId: 0
+  }
+
   return (
     <div className="App">
-      <SchoolPageApp />
+      <Navbar />
+      <Route exact path='/' render={props => <Landing {...props} />} />
+      <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
+      <Route path='/sdashboard' render={props => <SchoolPage {...props} school={fakeSchool} />} />
+      {/* Add more routes above this comment as necessary */}
     </div>
   );
 }

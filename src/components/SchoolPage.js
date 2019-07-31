@@ -32,14 +32,14 @@ const AddSchool = styled.div`
 `;
 
 function SchoolPage(props) {
-  const { name, location, currentfunds, neededfunds, schoolid } = props.school;
+  const { name, location, currentfunds, neededfunds, schoolId } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
     name: name,
     location: location,
     currentfunds: currentfunds,
     neededfunds: neededfunds,
-    schoolid: schoolid
+    schoolId: schoolId
   });
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
@@ -56,19 +56,19 @@ function SchoolPage(props) {
   // instead of hanldeSubmit in form.js we have new const, handleUpdate (passes inputed data as props to update/edit)
   const handleUpdate = event => {
     event.preventDefault();
-    props.update(input);
+    //props.update(input);
     setEditing(false);
-    const token = localStorage.getItem("token");
-    axios
-    .put(
-      "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolid}",
-      input,
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-    .then(res => {
-      console.log("succes", res);
-    })
-    .catch(err => console.log("err", err.res));
+    // const token = localStorage.getItem("auth-token");
+    // axios
+    // .put(
+    //   "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolId}",
+    //   input,
+    //   { headers: { Authorization: `Bearer ${token}` } }
+    // )
+    // .then(res => {
+    //   console.log("succes", res);
+    // })
+    // .catch(err => console.log("err", err.res));
 };
 
   // Edit shows as boolean - T/F (apply to if/else below)
@@ -104,7 +104,7 @@ function SchoolPage(props) {
       <div className="school-page-form">
         <form onSubmit={handleUpdate}>
             <AddSchool>
-          <h4>Add School</h4>
+          <h4>Edit</h4>
           </AddSchool>
           <label htmlFor="name">
             School:{" "}
