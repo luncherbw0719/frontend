@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from 'axios';
+import axios from "axios";
+
+
 
 const StyledCards = styled.div`
   display: flex;
@@ -24,7 +26,6 @@ const SchoolHeader = styled.div`
   font-size: 1.5rem;
 `;
 
-
 const AddSchool = styled.div`
   margin-top: 5%;
   font-family: "Arial Black"
@@ -32,15 +33,26 @@ const AddSchool = styled.div`
 `;
 
 function SchoolPage(props) {
-  const { name, location, currentfunds, neededfunds, schoolId } = props.school;
+  const {
+    name,
+    location,
+    currentfunds,
+    neededfunds,
+    schoolid,
+    donors,
+   
+  } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
     name: name,
     location: location,
     currentfunds: currentfunds,
     neededfunds: neededfunds,
-    schoolId: schoolId
+    schoolid: schoolid,
+    donors: donors,
+   
   });
+
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
 
@@ -56,22 +68,22 @@ function SchoolPage(props) {
   // instead of hanldeSubmit in form.js we have new const, handleUpdate (passes inputed data as props to update/edit)
   const handleUpdate = event => {
     event.preventDefault();
-    //props.update(input);
+    props.update(input);
     setEditing(false);
-    // const token = localStorage.getItem("auth-token");
-    // axios
-    // .put(
-    //   "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolId}",
-    //   input,
-    //   { headers: { Authorization: `Bearer ${token}` } }
-    // )
-    // .then(res => {
-    //   console.log("succes", res);
-    // })
-    // .catch(err => console.log("err", err.res));
-};
+    // const token = localStorage.getItem("token");
+//     axios
+//     .put(
+//       "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolid}",
+//       input,
+//       { headers: { Authorization: `Bearer ${token}` } }
+//     )
+//     .then(res => {
+//       console.log("succes", res);
+//     })
+//     .catch(err => console.log("err", err.res));
+// };
+  }
 
-  // Edit shows as boolean - T/F (apply to if/else below)
   console.log("edit", editing);
 
   if (editing === false) {
@@ -79,17 +91,21 @@ function SchoolPage(props) {
       // editing existing schools
       <StyledCards>
         <div>
-            <SchoolHeader>
-          <div>{name}</div>
+          <SchoolHeader>
+            <div>{name}</div>
           </SchoolHeader>
           <LineSpacing>
             <div>{location}</div>
           </LineSpacing>
 
           <LineSpacing>
-              <h3>Lunch Funding </h3>
+            <h3>Lunch Funding </h3>
             <div>Current: ${currentfunds}</div>
             <div>Needed: ${neededfunds}</div>
+          </LineSpacing>
+
+          <LineSpacing>
+            <div>Donors: {donors.length} </div>
           </LineSpacing>
 
           <LineSpacing>
@@ -103,8 +119,8 @@ function SchoolPage(props) {
     return (
       <div className="school-page-form">
         <form onSubmit={handleUpdate}>
-            <AddSchool>
-          <h4>Edit</h4>
+          <AddSchool>
+            <h4>Edit</h4>
           </AddSchool>
           <label htmlFor="name">
             School:{" "}
