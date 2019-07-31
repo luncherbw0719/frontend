@@ -25,7 +25,6 @@ const SchoolHeader = styled.div`
   font-size: 1.5rem;
 `;
 
-
 const AddSchool = styled.div`
   margin-top: 5%;
   font-family: "Arial Black"
@@ -33,15 +32,17 @@ const AddSchool = styled.div`
 `;
 
 function SchoolPage(props) {
-  const { name, location, currentFunds, fundGoal, schoolId } = props.school;
+  const { name, location, currentFunds, fundGoal, schoolId, donors } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
     name: name,
     location: location,
     currentFunds: currentFunds,
     fundGoal: fundGoal,
-    schoolId: schoolId
+    schoolId: schoolId,
+    donors: donors,
   });
+
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
 
@@ -59,20 +60,20 @@ function SchoolPage(props) {
     event.preventDefault();
     //props.update(input);
     setEditing(false);
-    // const token = localStorage.getItem("auth-token");
-    // axios
-    // .put(
-    //   "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolId}",
-    //   input,
-    //   { headers: { Authorization: `Bearer ${token}` } }
-    // )
-    // .then(res => {
-    //   console.log("succes", res);
-    // })
-    // .catch(err => console.log("err", err.res));
-};
+    // const token = localStorage.getItem("token");
+//     axios
+//     .put(
+//       "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolid}",
+//       input,
+//       { headers: { Authorization: `Bearer ${token}` } }
+//     )
+//     .then(res => {
+//       console.log("succes", res);
+//     })
+//     .catch(err => console.log("err", err.res));
+// };
+  }
 
-  // Edit shows as boolean - T/F (apply to if/else below)
   console.log("edit", editing);
 
   if (editing === false) {
@@ -80,8 +81,8 @@ function SchoolPage(props) {
       // editing existing schools
       <StyledCards>
         <div>
-            <SchoolHeader>
-          <div>{name}</div>
+          <SchoolHeader>
+            <div>{name}</div>
           </SchoolHeader>
           <LineSpacing>
             <div>{location}</div>
@@ -91,6 +92,10 @@ function SchoolPage(props) {
               <h3>Lunch Funding </h3>
             <div>Current: ${currentFunds}</div>
             <div>Needed: ${fundGoal}</div>
+          </LineSpacing>
+
+          <LineSpacing>
+            <div>Donors: {donors.length} </div>
           </LineSpacing>
 
           <LineSpacing>
@@ -104,8 +109,8 @@ function SchoolPage(props) {
     return (
       <div className="school-page-form">
         <form onSubmit={handleUpdate}>
-            <AddSchool>
-          <h4>Edit</h4>
+          <AddSchool>
+            <h4>Edit</h4>
           </AddSchool>
           <label htmlFor="name">
             School:{" "}

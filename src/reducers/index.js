@@ -45,6 +45,12 @@ export const reducer = (state = initialState, action) => {
         loggingIn: false
       }
     }
+    case actions.LOGOUT: {
+      return {
+        ...state,
+        token: false
+      }
+    }
     default: {
       return state;
     }

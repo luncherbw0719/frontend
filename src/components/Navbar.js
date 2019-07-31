@@ -4,6 +4,10 @@ import { Link, NavLink } from 'react-router-dom';
 
 import './styles/Navbar.scss';
 
+import { connect } from 'react-redux';
+
+import { logout } from '../actions';
+
 const Navbar = props => {
   return (
     <div className='navbar'>
@@ -16,9 +20,10 @@ const Navbar = props => {
       </div>
       <div className='right'>
         <div className='user'>Hello, User</div>
+        {props.token && <button onClick={() => props.logout(props.token)}>Logout</button>}
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default connect(state => ({...state}), { logout })(Navbar);

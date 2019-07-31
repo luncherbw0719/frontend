@@ -24,7 +24,8 @@ function App(props) {
     location: "Irvine",
     currentFunds: 1000,
     neededFunds: 400,
-    schoolId: 0
+    schoolId: 0,
+    donors: []
   }
 
   return (

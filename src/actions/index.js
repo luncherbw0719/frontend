@@ -4,9 +4,7 @@ export const SET_TOKEN = "SET_TOKEN";
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
-export const LOGOUT_START = "LOGOUT_START";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const LOGOUT = "LOGOUT";
 
 export const setToken = token => dispatch => {
   dispatch({
@@ -26,6 +24,7 @@ export const login = (username, password) => dispatch => {
       }
     })
     .then(res => {
+      console.log(res.data);
       localStorage.setItem('token', res.data.access_token);
       dispatch({ type: LOGIN_SUCCESS,
       payload: res.data.access_token });
@@ -38,4 +37,13 @@ export const login = (username, password) => dispatch => {
     });
 };
 
-export const logout = () => dispatch => {};
+export const logout = token => dispatch => {
+  localStorage.setItem('token', '');
+  dispatch({
+    type: LOGOUT
+  })
+  return axios    
+    .get('https://schooldonations-luncher.herokuapp.com/oauth/revoke-token', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+};
