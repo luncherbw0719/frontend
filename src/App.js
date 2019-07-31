@@ -1,29 +1,31 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
 
-import { useToken } from './hooks';
+import { useToken } from "./hooks";
 
-import { setToken } from './actions';
+import { setToken } from "./actions";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import SchoolCard from "./components/SchoolCard";
-import SchoolPageApp from './SchoolPageApp';
+import SchoolPageApp from "./SchoolPageApp";
 
 function App(props) {
   const [authToken, setAuthToken] = useToken();
 
   const init = () => {
     props.setToken(authToken, setAuthToken);
-  }
+  };
 
   useEffect(init, []);
 
   return (
     <div className="App">
-      <SchoolPageApp/> 
+      <SchoolPageApp />
     </div>
   );
 }
 
-export default connect(state => ({...state}), { setToken })(App);
+export default connect(
+  state => ({ ...state }),
+  { setToken }
+)(App);
