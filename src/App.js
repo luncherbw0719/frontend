@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
 
-import { useToken } from "./hooks";
-
 import { setToken } from "./actions";
 
 import { connect } from "react-redux";
@@ -10,15 +8,13 @@ import { connect } from "react-redux";
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import SchoolBrowse from './components/SchoolBrowse';
-import SchoolPageApp from './components/SchoolPageApp';
+import SchoolPage from './components/SchoolPage';
 
 import { Route } from 'react-router-dom';
 
 function App(props) {
-  const [authToken, setAuthToken] = useToken();
-
   const init = () => {
-    props.setToken(authToken, setAuthToken);
+    props.setToken(localStorage.getItem('token'));
   };
 
   useEffect(init, []);
@@ -28,7 +24,8 @@ function App(props) {
     location: "Irvine",
     currentFunds: 1000,
     neededFunds: 400,
-    schoolId: 0
+    schoolId: 0,
+    donors: []
   }
 
   return (
@@ -36,7 +33,7 @@ function App(props) {
       <Navbar />
       <Route exact path='/' render={props => <Landing {...props} />} />
       <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
-      <Route path='/sdashboard' render={props => <SchoolPageApp {...props}  />} />
+      <Route path='/sdashboard' render={props => <SchoolPage {...props} school={fakeSchool} />} />
       {/* Add more routes above this comment as necessary */}
     </div>
   );

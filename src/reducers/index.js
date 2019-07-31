@@ -2,7 +2,6 @@ import * as actions from '../actions';
 
 const initialState = {
   token: '',
-  setToken: null,
   loggingIn: false,
   loginError: ''
 }
@@ -14,8 +13,7 @@ export const reducer = (state = initialState, action) => {
       // { get, set }
       return {
         ...state,
-        token: action.payload.get,
-        setToken: action.payload.set
+        token: action.payload
       }
     }
     case actions.LOGIN_START: {
@@ -28,8 +26,8 @@ export const reducer = (state = initialState, action) => {
     case actions.LOGIN_SUCCESS: {
       //EXPECTED PAYLOAD:
       // token
-      if(state.setToken)
-        state.setToken(action.payload);
+      // if(state.setToken)
+      //   state.setToken(action.payload);
 
       return {
         ...state,
@@ -45,6 +43,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         loginError: action.payload,
         loggingIn: false
+      }
+    }
+    case actions.LOGOUT: {
+      return {
+        ...state,
+        token: false
       }
     }
     default: {

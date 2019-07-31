@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
-
+import { withAuth } from './WithAuth';
 
 const StyledCards = styled.div`
   display: flex;
@@ -33,24 +32,15 @@ const AddSchool = styled.div`
 `;
 
 function SchoolPage(props) {
-  const {
-    name,
-    location,
-    currentfunds,
-    neededfunds,
-    schoolid,
-    donors,
-   
-  } = props.school;
+  const { name, location, currentFunds, fundGoal, schoolId, donors } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
     name: name,
     location: location,
-    currentfunds: currentfunds,
-    neededfunds: neededfunds,
-    schoolid: schoolid,
+    currentFunds: currentFunds,
+    fundGoal: fundGoal,
+    schoolId: schoolId,
     donors: donors,
-   
   });
 
   // create new useState for editing data
@@ -68,7 +58,7 @@ function SchoolPage(props) {
   // instead of hanldeSubmit in form.js we have new const, handleUpdate (passes inputed data as props to update/edit)
   const handleUpdate = event => {
     event.preventDefault();
-    props.update(input);
+    //props.update(input);
     setEditing(false);
     // const token = localStorage.getItem("token");
 //     axios
@@ -99,9 +89,9 @@ function SchoolPage(props) {
           </LineSpacing>
 
           <LineSpacing>
-            <h3>Lunch Funding </h3>
-            <div>Current: ${currentfunds}</div>
-            <div>Needed: ${neededfunds}</div>
+              <h3>Lunch Funding </h3>
+            <div>Current: ${currentFunds}</div>
+            <div>Needed: ${fundGoal}</div>
           </LineSpacing>
 
           <LineSpacing>
@@ -140,21 +130,21 @@ function SchoolPage(props) {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="currentfunds">
+          <label htmlFor="currentFunds">
             Current Funds: ${" "}
             <input
               type="number"
-              name="currentfunds"
-              value={input.currentfunds}
+              name="currentFunds"
+              value={input.currentFunds}
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="neededfunds">
+          <label htmlFor="fundGoal">
             Needed Funds: ${" "}
             <input
               type="number"
-              name="neededfunds"
-              value={input.neededfunds}
+              name="fundGoal"
+              value={input.fundGoal}
               onChange={handleChange}
             />
           </label>
@@ -166,4 +156,4 @@ function SchoolPage(props) {
   }
 }
 
-export default SchoolPage;
+export default withAuth(SchoolPage);
