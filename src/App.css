@@ -31,3 +31,20 @@
     transform: rotate(360deg);
   }
 }
+/* For progress bar */
+
+/* .progress-bar {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 50px;
+  height: 20px;
+  width: 350px;
+}
+
+.filler {
+  background: blue;
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+
+} */

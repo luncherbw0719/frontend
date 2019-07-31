@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+// import "./App.css";
 
-import SchoolForm from "./components/SchoolForm";
-import SchoolPage from "./components/SchoolPage";
+import SchoolForm from "../components/SchoolForm";
+import SchoolPage from "../components/SchoolPage";
 import axios from "axios";
 
 function SchoolPageApp() {
