@@ -11,11 +11,13 @@ import SchoolBrowse from './components/SchoolBrowse';
 import SchoolPage from './components/SchoolPage';
 import Auth from './components/Auth';
 
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
+
+import SchoolDonor from "./components/SchoolDonor";
 
 function App(props) {
   const init = () => {
-    props.setToken(localStorage.getItem('token'));
+    props.setToken(localStorage.getItem("token"));
   };
 
   useEffect(init, []);
@@ -24,14 +26,14 @@ function App(props) {
     name: "Woodbridge",
     location: "Irvine",
     currentFunds: 1000,
-    neededFunds: 400,
+    fundGoal: 4000,
     schoolId: 0,
     donors: []
-  }
+  };
 
   return (
     <div className="App">
-        <Route path='/' render={props => <Navbar {...props} />} />
+      <Route path='/' render={props => <Navbar {...props} />} />
       <Route exact path='/' render={props => <Landing {...props} />} />
       <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
       <Route path='/sdashboard' render={props => <SchoolPage {...props} school={fakeSchool} />} />
