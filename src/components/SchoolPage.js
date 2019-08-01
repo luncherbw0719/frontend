@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { withAuth } from "./WithAuth";
 
-import { withAuth } from './WithAuth';
+import SchoolDonor from "./SchoolDonor";
 
 const StyledCards = styled.div`
   display: flex;
@@ -32,7 +33,14 @@ const AddSchool = styled.div`
 `;
 
 function SchoolPage(props) {
-  const { name, location, currentFunds, fundGoal, schoolId, donors } = props.school;
+  const {
+    name,
+    location,
+    currentFunds,
+    fundGoal,
+    schoolId,
+    donors
+  } = props.school;
   // same useState from form.js
   const [input, setInput] = useState({
     name: name,
@@ -40,39 +48,44 @@ function SchoolPage(props) {
     currentFunds: currentFunds,
     fundGoal: fundGoal,
     schoolId: schoolId,
-    donors: donors,
+    donors: donors
   });
 
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
 
+  const fakeDonor = {
+    name: "John",
+    amount: 50,
+    date: "7-31-2019"
+  };
   const handleEdit = event => {
     setEditing(!editing);
   };
-  // same as SchoolForm.js (handleChange is form input)
+  // handleChange is form input
   const handleChange = event => {
     console.log(event.target.name);
     console.log(event.target.value);
     setInput({ ...input, [event.target.name]: event.target.value });
   };
-  // instead of hanldeSubmit in form.js we have new const, handleUpdate (passes inputed data as props to update/edit)
+  // handleUpdate is update/editing school
   const handleUpdate = event => {
     event.preventDefault();
     //props.update(input);
     setEditing(false);
     // const token = localStorage.getItem("token");
-//     axios
-//     .put(
-//       "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolid}",
-//       input,
-//       { headers: { Authorization: `Bearer ${token}` } }
-//     )
-//     .then(res => {
-//       console.log("succes", res);
-//     })
-//     .catch(err => console.log("err", err.res));
-// };
-  }
+    //     axios
+    //     .put(
+    //       "https://schooldonations-luncher.herokuapp.com/schools/school/{schoolid}",
+    //       input,
+    //       { headers: { Authorization: `Bearer ${token}` } }
+    //     )
+    //     .then(res => {
+    //       console.log("succes", res);
+    //     })
+    //     .catch(err => console.log("err", err.res));
+    // };
+  };
 
   console.log("edit", editing);
 
@@ -89,17 +102,19 @@ function SchoolPage(props) {
           </LineSpacing>
 
           <LineSpacing>
-              <h3>Lunch Funding </h3>
+            <h3>Lunch Funding </h3>
             <div>Current: ${currentFunds}</div>
-            <div>Needed: ${fundGoal}</div>
+            <div>Fund Goal: ${fundGoal}</div>
           </LineSpacing>
-
-          <LineSpacing>
-            <div>Donors: {donors.length} </div>
-          </LineSpacing>
+          <div>
+            {donors.map(donor => (
+              <SchoolDonor key={donor.id} donor={donor} />
+            ))}
+          </div>
 
           <LineSpacing>
             <button onClick={handleEdit}>Edit School</button>
+            {/* {props.dashboard ? <button onClick={handleEdit}>Edit School</button> : null} */}
           </LineSpacing>
         </div>
       </StyledCards>
@@ -140,7 +155,7 @@ function SchoolPage(props) {
             />
           </label>
           <label htmlFor="fundGoal">
-            Needed Funds: ${" "}
+            Fund Goal: ${" "}
             <input
               type="number"
               name="fundGoal"
