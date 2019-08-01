@@ -5,6 +5,9 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
+export const SIGNUP_START = 'SIGNUP_START';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
 export const setToken = token => dispatch => {
   dispatch({
@@ -12,6 +15,10 @@ export const setToken = token => dispatch => {
     payload: token
   });
 };
+
+export const signup = (creds) => dispatch => {
+  // SIGNUP FUNCTIONALITY
+}
 
 export const login = (username, password) => dispatch => {
   let creds = `grant_type=password&username=${username}&password=${password}`;
@@ -38,6 +45,7 @@ export const login = (username, password) => dispatch => {
 };
 
 export const logout = token => dispatch => {
+  console.log('signing out');
   localStorage.setItem('token', '');
   dispatch({
     type: LOGOUT

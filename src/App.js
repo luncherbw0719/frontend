@@ -5,10 +5,11 @@ import { setToken } from "./actions";
 
 import { connect } from "react-redux";
 
-import Navbar from "./components/Navbar";
-import Landing from "./components/Landing";
-import SchoolBrowse from "./components/SchoolBrowse";
-import SchoolPage from "./components/SchoolPage";
+import Navbar from './components/Navbar';
+import Landing from './components/Landing';
+import SchoolBrowse from './components/SchoolBrowse';
+import SchoolPage from './components/SchoolPage';
+import Auth from './components/Auth';
 
 import { Route } from "react-router-dom";
 
@@ -32,15 +33,11 @@ function App(props) {
 
   return (
     <div className="App">
-      <Navbar />
-      <Route exact path="/" render={props => <Landing {...props} />} />
-      <Route path="/schools" render={props => <SchoolBrowse {...props} />} />
-      <Route
-        path="/sdashboard"
-        render={props => (
-          <SchoolPage {...props} dashboard school={fakeSchool} />
-        )}
-      />
+      <Route path='/' render={props => <Navbar {...props} />} />
+      <Route exact path='/' render={props => <Landing {...props} />} />
+      <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
+      <Route path='/sdashboard' render={props => <SchoolPage {...props} school={fakeSchool} />} />
+      <Route path='/auth' render={props => <Auth {...props} />} />
       {/* Add more routes above this comment as necessary */}
     </div>
   );

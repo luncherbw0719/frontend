@@ -1,0 +1,108 @@
+.login {
+  border: 2px solid #F2755C;
+  width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  .form-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    flex-direction: column;
+
+    .field-label {
+      min-width: 80px;
+      display: flex;
+      justify-content: flex-start;
+      user-select: none;
+    }
+    
+    .field-input {
+      flex-grow: 100;
+      padding: 5px 20px;
+      border: 1px solid black;
+      border-radius: 9px;
+      margin-bottom: 8px;
+      outline: 0;
+
+      transition: border 0.4s;
+    }
+
+    .field-input:focus {
+      border: 1px solid #F2755C;
+    }
+
+    .radio {
+      margin-top: 6px;
+      display: flex;
+      width: 50%;
+      justify-content: space-between;
+    }
+
+    .dollarsign {
+     position: absolute;
+     color: gray;
+     transform: translateY(24px) translateX(10px); 
+    }
+  }
+
+  .form-btn {
+    border: none;
+    background: #F2755C;
+    color: white;
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 7px;
+    outline: 0;
+    cursor: pointer;
+
+    transition: background 0.2s;
+  }
+
+  .form-btn:hover {
+    background: rgb(247, 136, 114);
+  }
+
+  .form-btn:disabled {
+    background: rgb(102, 53, 43);
+    cursor: default;
+  }
+
+  .error {
+    border: 1px solid crimson;
+    margin-top: 8px;
+    border-radius: 7px;
+    padding: 3px;
+    color: red;
+    background: rgb(238, 232, 232);
+    user-select: none;
+  }
+
+  .switch {
+    margin-top: 16px;
+    user-select: none;
+
+    .signup-btn {
+      color: #F2755C;
+      background: white;
+      text-decoration: underline;
+      cursor: pointer;
+
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .signup-btn:hover {
+      color: rgb(247, 136, 114);
+      background: rgba(247, 136, 114, 0.116);
+    }
+
+    .signup-btn:active {
+      color: black;
+    }
+  }
+}
