@@ -2,8 +2,8 @@ import React from "react";
 const Donation = props => {
   return (
     <div>
-      {props.name}
-      {props.amount}
+      {props.donation.name}
+      {props.donation.amount}
     </div>
   );
 };

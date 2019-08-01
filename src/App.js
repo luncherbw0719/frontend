@@ -18,7 +18,7 @@ import SchoolDonor from "./components/SchoolDonor";
 
 function App(props) {
   const init = () => {
-    props.setToken(localStorage.getItem("token"));
+    if (props.setToken) props.setToken(localStorage.getItem("token"));
   };
 
   useEffect(init, []);
@@ -44,7 +44,7 @@ function App(props) {
       <Route path="/auth" render={props => <Auth {...props} />} />
       <Route
         path="/ddashboard"
-        render={(props = <DonorDashboard {...props} />)}
+        render={props => <DonorDashboard {...props} />}
       />
       {/* Add more routes above this comment as necessary */}
     </div>
