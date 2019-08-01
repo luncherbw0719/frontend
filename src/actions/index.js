@@ -45,6 +45,7 @@ export const login = (username, password) => dispatch => {
 };
 
 export const logout = token => dispatch => {
+  console.log('signing out');
   localStorage.setItem('token', '');
   dispatch({
     type: LOGOUT

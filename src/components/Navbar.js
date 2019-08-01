@@ -19,8 +19,10 @@ const Navbar = props => {
       {/* Conditional NavLink will go here, depending on whether account type is donor or school */}
       </div>
       <div className='right'>
-        <div className='user'>Hello, User</div>
-        {props.token && <button onClick={() => props.logout(props.token)}>Logout</button>}
+        { props.token ?
+        <div className='user'>Hello, {props.username}
+        <div onClick={props.logout} className='signout-btn'>LOGOUT</div></div>
+      : <button onClick={() => props.history.push('/auth')} className='login-btn'>LOG IN</button>}
       </div>
     </div>
   );

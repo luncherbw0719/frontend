@@ -3,7 +3,8 @@ import * as actions from '../actions';
 const initialState = {
   token: '',
   loggingIn: false,
-  loginError: ''
+  loginError: '',
+  username: 'User'
 }
 
 export const reducer = (state = initialState, action) => {

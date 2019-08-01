@@ -31,7 +31,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <Navbar />
+        <Route path='/' render={props => <Navbar {...props} />} />
       <Route exact path='/' render={props => <Landing {...props} />} />
       <Route path='/schools' render={props => <SchoolBrowse {...props} />} />
       <Route path='/sdashboard' render={props => <SchoolPage {...props} school={fakeSchool} />} />
