@@ -31,7 +31,7 @@ export default function SchoolBrowse() {
       </header>
 
       <div class="schoolcards">
-        3
+        
         {schools.map(school => (
           <SchoolCard {...school} />
         ))}
