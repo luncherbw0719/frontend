@@ -4,7 +4,10 @@ const initialState = {
   token: '',
   loggingIn: false,
   loginError: '',
-  username: 'User'
+  username: 'User',
+  schools: [],
+  gettingSchools: false,
+  getSchoolsError: ''
 }
 
 export const reducer = (state = initialState, action) => {
@@ -50,6 +53,27 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         token: false
+      }
+    }
+    case actions.GETSCHOOLS_START: {
+      return {
+        ...state,
+        gettingSchools: true,
+        getSchoolsError: ''
+      }
+    }
+    case actions.GETSCHOOLS_SUCCESS: {
+      return {
+        ...state,
+        gettingSchools: false,
+        schools: action.payload
+      }
+    }
+    case actions.GETSCHOOLS_FAILURE: {
+      return {
+        ...state,
+        gettingSchools: false,
+        getSchoolsError: action.payload
       }
     }
     default: {

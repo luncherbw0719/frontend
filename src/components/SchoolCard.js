@@ -1,14 +1,26 @@
-import React from 'react';
-import './styles/SchoolCard.scss';
+import React, { useState } from "react";
+import "./styles/SchoolCard.scss";
+
+import { Modal, Badge, Progress } from 'reactstrap';
 
 const SchoolCard = props => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className='school-card'>
-      <h1>School: {props.schoolName}</h1>
-      <h2>School ID: {props.schoolID}</h2>
-      <h3>Location: {props.schoolLocation}</h3>
-      <h3>Current Funds: {props.CurrentFunds}</h3>
-      <h3>Funds Needed: {props.NeededFunds}</h3>
+    <div className="school-card">
+      <div className='content'>
+      <div className="left">
+        <h1>{props.name} {props.currentfunds >= props.fundgoals && <Badge color='success'>REACHED</Badge>} </h1>
+        <h3 className="subhead">{props.location}</h3>
+      </div>
+      <div className="right">
+          <h3>Raised ${props.currentfunds} of ${props.fundgoals}</h3>
+          <Progress color='info' value={Math.round((props.currentfunds / props.fundgoals) * 100)}>{Math.round((props.currentfunds / props.fundgoals) * 100)}%</Progress>
+      </div>
+      </div>
+      <div className='donate'>
+        <button className='donate-btn'>Donate</button>
+      </div>
     </div>
   );
 };

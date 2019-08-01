@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SchoolCard from "./SchoolCard";
 
-import axios from "axios";
+import { getSchools } from '../actions';
 
-export default function SchoolBrowse() {
-  const [schools, setSchools] = useState([
-    {
-      schoolName: "Oxford Academy",
-      image: 'url',
-      schoolLocation: "Kuwait City",
-      currentFunds: 1000
-    }
-  ]);
+import { connect } from 'react-redux';
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://schooldonations-luncher.herokuapp.com/schools/schools")
+export default connect(state => ({...state}), { getSchools })(function SchoolBrowse(props) {
 
-  //     .then(res => {
-  //       setSchools(res.data.results);
-  //     })
-
-  //     .catch(err => console.log("Error Msg", err));
-  // }, []);
+  useEffect(() => {props.getSchools()}, []);
 
   return (
     <section>
@@ -30,12 +15,18 @@ export default function SchoolBrowse() {
         <h1>Browse Schools</h1>
       </header>
 
-      <div class="schoolcards">
-        
-        {schools.map(school => (
-          <SchoolCard {...school} />
-        ))}
+      <div className="schoolcards">
+        {
+          props.gettingSchools ? <div className='loading'>Getting schools...</div> :
+          props.getSchoolsError ? <div className='error'>{props.getSchoolsError}</div> : (
+            props.schools.length > 0 ? (
+              props.schools.map(school => (
+                <SchoolCard key={school.id} {...school} />
+              ))
+            ) : <span>No schools found</span>
+          )
+        }
       </div>
     </section>
   );
-}
+})
