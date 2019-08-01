@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 96px;
+  height: 104px;
   user-select: none;
   
   color: #F2755C;
@@ -17,11 +17,8 @@
     align-items: center;
 
     .header {
-      margin: 24px;
       margin: 0 48px;
-      color: #F2755C;
       cursor: pointer;
-      text-decoration: none;
     }
   }
 
