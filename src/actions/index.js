@@ -8,6 +8,9 @@ export const LOGOUT = "LOGOUT";
 export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+export const GETSCHOOLS_START = 'GETSCHOOLS_START';
+export const GETSCHOOLS_SUCCESS = 'GETSCHOOLS_SUCCESS';
+export const GETSCHOOLS_FAILURE = 'GETSCHOOLS_FAILURE';
 
 export const setToken = token => dispatch => {
   dispatch({
@@ -55,3 +58,24 @@ export const logout = token => dispatch => {
       headers: { Authorization: `Bearer ${token}` }
     })
 };
+
+export const getSchools = () => dispatch => {
+  dispatch({
+    type: GETSCHOOLS_START
+  })
+  return axios.get('https://schooldonations-luncher.herokuapp.com/schools/schools')
+  .then(res => {
+    console.log(res);
+    dispatch({
+      type: GETSCHOOLS_SUCCESS,
+      payload: res.data
+    })
+  })
+  .catch(err => {
+    console.log(err);
+    dispatch({
+      type: GETSCHOOLS_FAILURE,
+      payload: "There was an error retrieving schools. Please try again later."
+    })
+  })
+}

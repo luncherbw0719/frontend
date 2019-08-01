@@ -1,23 +1,120 @@
 .school-card {
-display:block;
-padding: 20px 20px 25px;
-border: 1px solid lightgrey;
-border-radius: 10px;
-background-color: white;
-position: relative;
+  display: flex;
+  padding: 20px 72px 25px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  background-color: white;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px lightgrey;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+  user-select: none;
+  text-align: start;
 
+  .content {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2rem;
+    flex-grow: 200;
+  }
 
-align-content: center;
-overflow: hidden;
-box-shadow: 2px 2px 2px lightgrey;
-margin-left:50px;
-margin-right:50px;
-margin-top:10px;
+  .left {
+    display: flex;
+    flex-direction: column;
+  }
 
+  .right {
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    justify-content: center;
+
+    transition: width 0.2s;
+
+    h3 {
+      margin: 12px 0;
+      align-self: center;
+    }
+  }
 
   h1 {
-      color: #F2755C;
-      
+    color: #f2755c;
 
-  }  
+    transition: font-size 0.2s;
+  }
+
+  .subhead {
+    color: gray;
+    margin: 0;
+
+    transition: font-size 0.2s;
+  }
+
+  .donate-btn {
+    border: none;
+    color: #F2755C;
+    background: white;
+    font-weight: bold;
+    padding: 1px;
+    outline: 0;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 2rem;
+    text-decoration: underline;
+    margin-left: 8px;
+
+
+    transition: background 0.2s, color 0.1s;
+  }
+
+  .donate-btn:hover {
+    background: rgba(242, 117, 92, 0.151);
+  }
+
+  .donate-btn:active {
+    color: black;
+  }
+
+  .donate-btn:disabled {
+    background: rgb(102, 53, 43);
+    cursor: default;
+  }
+
+  .donate {
+    display: flex;
+    flex-shrink: 500;
+  }
+
+  @media (max-width: 1152px) {
+    .content {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 780px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    margin: 12px;
+
+    .content {
+      margin-right: 0;
+
+      h1 { 
+        font-size: 22px;
+        margin: 0;
+      }
+
+      .subhead {
+        font-size: 14px;
+      }
+    }
+
+    .right {
+      width: 100%;
+      min-width: 240px;
+    }
+  }
 }

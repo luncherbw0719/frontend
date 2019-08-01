@@ -14,6 +14,8 @@ import { reducer } from './reducers';
 
 import thunk from 'redux-thunk';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render((
