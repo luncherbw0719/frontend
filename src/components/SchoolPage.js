@@ -1,9 +1,14 @@
+// Single School Page - An admin will be able to see their current funds and be able to add their needs
+// for more funding, update and delete their profile and funding needs.
+// This is the page that we connected to App.js
 import React, { useState } from "react";
 import styled from "styled-components";
 import { withAuth } from "./WithAuth";
 
 import SchoolDonor from "./SchoolDonor";
+import { Progress } from "reactstrap";
 
+// Styling with styled components
 const StyledCards = styled.div`
   display: flex;
   flex: 1;
@@ -11,7 +16,7 @@ const StyledCards = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  background-color: lightblue;
+  background-color: #f2755c;
   width: 100%;
   padding: 2%;
   margin-top: 3%;
@@ -28,10 +33,12 @@ const SchoolHeader = styled.div`
 
 const AddSchool = styled.div`
   margin-top: 5%;
+  margin-bottom: 5%;
   font-family: "Arial Black"
   color: red;
 `;
 
+// Passing props to display with same text style as backend
 function SchoolPage(props) {
   const {
     name,
@@ -41,7 +48,7 @@ function SchoolPage(props) {
     schoolId,
     donors
   } = props.school;
-  // same useState from form.js
+
   const [input, setInput] = useState({
     name: name,
     location: location,
@@ -54,21 +61,24 @@ function SchoolPage(props) {
   // create new useState for editing data
   const [editing, setEditing] = useState(false);
 
-  const fakeDonor = {
-    name: "John",
-    amount: 50,
-    date: "7-31-2019"
-  };
-  const handleEdit = event => {
-    setEditing(!editing);
-  };
+  // const fakeDonor = {
+  //   name: "John",
+  //   amount: 50,
+  //   date: "7-31-2019"
+  // };
+
   // handleChange is form input
   const handleChange = event => {
     console.log(event.target.name);
     console.log(event.target.value);
     setInput({ ...input, [event.target.name]: event.target.value });
   };
-  // handleUpdate is update/editing school
+
+  // Editing/updating existing schools
+  const handleEdit = event => {
+    setEditing(!editing);
+  };
+
   const handleUpdate = event => {
     event.preventDefault();
     //props.update(input);
@@ -90,8 +100,8 @@ function SchoolPage(props) {
   console.log("edit", editing);
 
   if (editing === false) {
+    // If nothing is being edited, return this (how it originally shows up on school dashboard)
     return (
-      // editing existing schools
       <StyledCards>
         <div>
           <SchoolHeader>
@@ -102,9 +112,20 @@ function SchoolPage(props) {
           </LineSpacing>
 
           <LineSpacing>
-            <h3>Lunch Funding </h3>
-            <div>Current: ${currentFunds}</div>
-            <div>Fund Goal: ${fundGoal}</div>
+            <h3>Lunch Funding Status </h3>
+            <div>
+              Raised ${currentFunds} of ${fundGoal}
+            </div>
+            <LineSpacing>
+              <div>
+                <Progress
+                  color="info"
+                  value={Math.round((currentFunds / fundGoal) * 100)}
+                >
+                  {Math.round((currentFunds / fundGoal) * 100)}%
+                </Progress>{" "}
+              </div>
+            </LineSpacing>
           </LineSpacing>
           <div>
             {donors.map(donor => (
@@ -120,53 +141,55 @@ function SchoolPage(props) {
       </StyledCards>
     );
   } else {
-    // Single School Page - An admin will be able to see their current funds and be able to add their needs for more funding, update and delete their profile and funding needs.
+    // If the form is being edited, return this (this is for the school admin to go in an change their school's info)
+
     return (
-      <div className="school-page-form">
-        <form onSubmit={handleUpdate}>
-          <AddSchool>
-            <h4>Edit</h4>
-          </AddSchool>
-          <label htmlFor="name">
-            School:{" "}
-            <input
-              type="text"
-              name="name"
-              value={input.name}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="location">
-            Location:{" "}
-            <input
-              type="text"
-              name="location"
-              value={input.location}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="currentFunds">
-            Current Funds: ${" "}
-            <input
-              type="number"
-              name="currentFunds"
-              value={input.currentFunds}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="fundGoal">
-            Fund Goal: ${" "}
-            <input
-              type="number"
-              name="fundGoal"
-              value={input.fundGoal}
-              onChange={handleChange}
-            />
-          </label>
-          <button>Submit!</button>
-        </form>
-      </div>
-      // end of copy/paste from SchoolForm.js
+      <StyledCards>
+        <div className="school-page-form">
+          <form onSubmit={handleUpdate}>
+            <AddSchool>
+              <h1>Edit School Info</h1>
+            </AddSchool>
+            <label htmlFor="name">
+              School:{" "}
+              <input
+                type="text"
+                name="name"
+                value={input.name}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="location">
+              Location:{" "}
+              <input
+                type="text"
+                name="location"
+                value={input.location}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="currentFunds">
+              Current Funds: ${" "}
+              <input
+                type="number"
+                name="currentFunds"
+                value={input.currentFunds}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="fundGoal">
+              Fund Goal: ${" "}
+              <input
+                type="number"
+                name="fundGoal"
+                value={input.fundGoal}
+                onChange={handleChange}
+              />
+            </label>
+            <button>Submit!</button>
+          </form>
+        </div>
+      </StyledCards>
     );
   }
 }
