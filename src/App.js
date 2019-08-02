@@ -10,7 +10,10 @@ import Landing from "./components/Landing";
 import SchoolBrowse from "./components/SchoolBrowse";
 import SchoolPage from "./components/SchoolPage";
 import Auth from "./components/Auth";
+<<<<<<< HEAD
 import DonorDashboard from "./components/DonorDashboard";
+=======
+>>>>>>> 3c22f4c4f18b068e34c777a1cead3b2e2fd918e5
 
 import { Route } from "react-router-dom";
 
@@ -42,10 +45,13 @@ function App(props) {
         render={props => <SchoolPage {...props} school={fakeSchool} />}
       />
       <Route path="/auth" render={props => <Auth {...props} />} />
+<<<<<<< HEAD
       <Route
         path="/ddashboard"
         render={props => <DonorDashboard {...props} />}
       />
+=======
+>>>>>>> 3c22f4c4f18b068e34c777a1cead3b2e2fd918e5
       {/* Add more routes above this comment as necessary */}
     </div>
   );
