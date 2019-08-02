@@ -21,6 +21,37 @@ export const setToken = token => dispatch => {
 
 export const signup = (creds) => dispatch => {
   // SIGNUP FUNCTIONALITY
+  const info = creds.accountType === 'donor' ? {
+    name: creds.name,
+    isdonor: true,
+  } : {
+    'name': creds.name,
+    'location': creds.location,
+    'fundgoals': creds.targetFunds
+  }
+
+  dispatch({
+    type: SIGNUP_START
+  })
+  return axios.post(`https://schooldonations-luncher.herokuapp.com/signup/${creds.email}/${creds.password}`, info, {
+    headers: { Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+      'Content-Type': 'application/JSON',
+    }
+  })
+  .then(res => {
+    console.log(res);
+    dispatch({
+      type: SIGNUP_SUCCESS,
+      payload: res.data
+    })
+  })
+  .catch(err => {
+    console.log(err.message);
+    dispatch({
+      type: SIGNUP_FAILURE,
+      payload: "An error occured while attempting to create your account"
+    })
+  })
 }
 
 export const login = (username, password) => dispatch => {
@@ -37,7 +68,7 @@ export const login = (username, password) => dispatch => {
       console.log(res.data);
       localStorage.setItem('token', res.data.access_token);
       dispatch({ type: LOGIN_SUCCESS,
-      payload: res.data.access_token });
+      payload: res.data });
     })
     .catch(err => {
       dispatch({
