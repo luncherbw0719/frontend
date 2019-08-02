@@ -1,0 +1,110 @@
+.navbar {
+  top: 0;
+  border-bottom: 1px solid gray;
+  box-shadow: 0 0 7px -1px gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 104px;
+  user-select: none;
+  
+  color: #F2755C;
+  font-weight: bold;
+  font-size: 24px;
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    .header {
+      margin: 0 48px;
+      cursor: pointer;
+    }
+  }
+
+  .navbar-btn {
+    text-decoration: none;
+    height: 48px;
+    display: flex;
+    padding: 24px;
+    align-items: center;
+    margin: 0 16px;
+    color: #F2755C;
+    height: 100%;
+    border-radius: 8px;
+
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .navbar-btn:hover {
+    background-color: rgba(242, 117, 92, 0.363);
+    color: rgb(170, 79, 60);
+  }
+
+  .navbar-btn.active {
+    background-color: rgb(255, 136, 112);
+    color: white;
+  }
+
+  .login-btn {
+    border: none;
+    background: #F2755C;
+    color: white;
+    font-weight: bold;
+    padding: 14px;
+    border-radius: 7px;
+    outline: 0;
+    cursor: pointer;
+    margin-right: 2rem;
+
+    transition: background 0.2s;
+  }
+
+  .login-btn:hover {
+    background: rgb(247, 136, 114);
+  }
+
+  .login-btn:disabled {
+    background: rgb(102, 53, 43);
+    cursor: default;
+  }
+
+  .signout-btn {
+    border: none;
+    color: #F2755C;
+    background: white;
+    font-weight: bold;
+    padding: 1px;
+    outline: 0;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 2rem;
+    text-decoration: underline;
+    margin-left: 8px;
+
+    transition: background 0.2s, color 0.1s;
+  }
+
+  .signout-btn:hover {
+    background: rgba(242, 117, 92, 0.151);
+  }
+
+  .signout-btn:active {
+    color: black;
+  }
+
+  .signout-btn:disabled {
+    background: rgb(102, 53, 43);
+    cursor: default;
+  }
+
+  .user {
+    margin-right: 48px;
+    display: flex;
+    align-content: flex-start;
+  }
+
+  @media (max-width: 1265px){
+    
+  }
+}

@@ -1,11 +1,15 @@
 import React from 'react';
 
-const WithAuth = props => {
-  return (
-    <div className='auth'>
-      
-    </div>
-  );
-};
+import Auth from './Auth';
 
-export default WithAuth;
+import './styles/WithAuth.scss';
+
+import { connect } from 'react-redux';
+
+export const withAuth = Component => connect(state => ({...state}))(props => {
+
+    return props.token ? (
+      <Component {...props} />
+    ) : <Auth {...props} />
+  }
+);

@@ -2,9 +2,12 @@ import * as actions from '../actions';
 
 const initialState = {
   token: '',
-  setToken: null,
   loggingIn: false,
-  loginError: ''
+  loginError: '',
+  username: 'User',
+  schools: [],
+  gettingSchools: false,
+  getSchoolsError: ''
 }
 
 export const reducer = (state = initialState, action) => {
@@ -14,8 +17,7 @@ export const reducer = (state = initialState, action) => {
       // { get, set }
       return {
         ...state,
-        token: action.payload.get,
-        setToken: action.payload.set
+        token: action.payload
       }
     }
     case actions.LOGIN_START: {
@@ -28,8 +30,8 @@ export const reducer = (state = initialState, action) => {
     case actions.LOGIN_SUCCESS: {
       //EXPECTED PAYLOAD:
       // token
-      if(state.setToken)
-        state.setToken(action.payload);
+      // if(state.setToken)
+      //   state.setToken(action.payload);
 
       return {
         ...state,
@@ -45,6 +47,33 @@ export const reducer = (state = initialState, action) => {
         ...state,
         loginError: action.payload,
         loggingIn: false
+      }
+    }
+    case actions.LOGOUT: {
+      return {
+        ...state,
+        token: false
+      }
+    }
+    case actions.GETSCHOOLS_START: {
+      return {
+        ...state,
+        gettingSchools: true,
+        getSchoolsError: ''
+      }
+    }
+    case actions.GETSCHOOLS_SUCCESS: {
+      return {
+        ...state,
+        gettingSchools: false,
+        schools: action.payload
+      }
+    }
+    case actions.GETSCHOOLS_FAILURE: {
+      return {
+        ...state,
+        gettingSchools: false,
+        getSchoolsError: action.payload
       }
     }
     default: {
